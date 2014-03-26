@@ -28,7 +28,7 @@ print '1. The most common word is:', pop_words[0],'\n'
 print '2. The least common word is:', pop_words[-1],'\n'
 
 index_guitar = filter(lambda x: x[1] in ['guitar','Guitar','guitars','Guitars'], enumerate(deals))
-index = list(max(0,x[0]-1) for x in index_guitar)	#index of guitar adjectives
+index = list(max(0,x[0]-1) for x in index_guitar) + list(max(0,x[0]-2) for x in index_guitar)	#index of guitar adjectives
 
 # First approach: guitar_brands = ['Fender','Squier','Gibson','Epiphone','Jackson','ESP','Schecter','Dean','Ibanez', 'Carvin','Martin', 'Taylor', 'Yamaha','Takamine','Ovation','Marshall','Bassman','Vox']	#Guitar brands to be filtered out
 # prec_adj = filter(lambda x: x.isalpha() and x not in guitar_brands, set(deals[i] for i in index))
