@@ -29,12 +29,20 @@ print '2. The least common word is:', pop_words[-1],'\n'
 
 index_guitar = filter(lambda x: x[1] in ['guitar','Guitar','guitars','Guitars'], enumerate(deals))
 index = list(max(0,x[0]-1) for x in index_guitar)	#index of guitar adjectives
-guitar_brands = ['Fender','Squier','Gibson','Epiphone','Jackson','ESP','Schecter','Dean','Ibanez', 'Carvin','Martin', 'Taylor', 'Yamaha','Takamine','Ovation','Marshall','Bassman','Vox']	#Guitar brands to be filtered out
-prec_adj = filter(lambda x: x.isalpha() and x not in guitar_brands, set(deals[i] for i in index))
-print '3. There are ',len(prec_adj), 'types of guitars in deals.txt, they are: \n'
-print ', '.join(prec_adj)
+
+# First approach: guitar_brands = ['Fender','Squier','Gibson','Epiphone','Jackson','ESP','Schecter','Dean','Ibanez', 'Carvin','Martin', 'Taylor', 'Yamaha','Takamine','Ovation','Marshall','Bassman','Vox']	#Guitar brands to be filtered out
+# prec_adj = filter(lambda x: x.isalpha() and x not in guitar_brands, set(deals[i] for i in index))
+
+# 2nd approach: There is only a finite number of Guitar types
+guitar_types = ['electric','acoustic','classical','steel-string','bass','baritone','6-string','7-string','8-string','hollow-body','semi-hollow','semi-acoustic','archtop']
+prec_adj = filter(lambda x: x.isalpha(), set(deals[i] for i in index))
+prec_adj = map(lambda x: x.lower(), prec_adj)
+### End 2nd approach
+
+deal_guitar_types = set(guitar_types) & set(prec_adj)
+print '3. There are ',len(deal_guitar_types), 'types of guitars in deals.txt, they are:',', '.join(deal_guitar_types), '\b.\n'
 
 ##### Remarks:
-#1. Regarding 3rd question the code lists far too many guitar types than there really is. Several insignificant words need to be removed but I could not find the tool to do this kind of task.
+#1. Regarding 3rd question the code lists far too many guitar types than there really is. Several insignificant words need to be removed but I could not find the tool to do this kind of task. 2nd approach only looks for KNOWN types of guitars, much better!
 
 #2. Performance can be improved via, more iteration, more use of built-in functions, utilizing regular expressions.
